@@ -9,4 +9,4 @@ const BottomNavigator = createBottomTabNavigator({
   auth: AuthScreen
 });
 
-export default (MainNavigation = createAppContainer(BottomNavigator));
+export default createAppContainer(BottomNavigator);

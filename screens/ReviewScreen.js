@@ -17,6 +17,7 @@ class ReviewScreen extends Component {
       headerRight: (
         <Button
           title="Settings"
+          type="clear"
           onPress={() => navigation.navigate('settings')}
         />
       )

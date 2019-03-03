@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 30,
-    color: 'white'
+    color: 'white',
+    textAlign: 'center'
   },
   buttonStyle: {
     backgroundColor: 'orange'

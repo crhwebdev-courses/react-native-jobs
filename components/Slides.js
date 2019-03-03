@@ -7,7 +7,10 @@ class Slides extends Component {
   renderSlides() {
     return this.props.data.map(slide => {
       return (
-        <View key={slide.text} style={styles.slideStyle}>
+        <View
+          key={slide.text}
+          style={[styles.slideStyle, { backgroundColor: slide.color }]}
+        >
           <Text style={styles.textStyle}>{slide.text}</Text>
         </View>
       );
@@ -31,7 +34,8 @@ const styles = {
     width: SCREEN_WIDTH
   },
   textStyle: {
-    fontSize: 30
+    fontSize: 30,
+    color: 'white'
   }
 };
 

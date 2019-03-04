@@ -26,11 +26,20 @@ const MainFlowNavigator = createBottomTabNavigator({
 
 //Top level Tab navigation which contains initial secreens (Welcome and Auth)
 // and main flow
-const MainNavigator = createBottomTabNavigator({
-  welecome: WelecomScreen,
-  auth: AuthScreen,
-  main: MainFlowNavigator
-});
+const MainNavigator = createBottomTabNavigator(
+  {
+    welecome: WelecomScreen,
+    auth: AuthScreen,
+    main: MainFlowNavigator
+  },
+  {
+    defaultNavigationOptions: {
+      tabBarVisible: false
+    }
+  }
+);
+
+const MainNavigatorContainer = createAppContainer(MainNavigator);
 
 //Note: we only need to wrap top level navigation in createAppContainer
-export default createAppContainer(MainNavigator);
+export default MainNavigatorContainer;

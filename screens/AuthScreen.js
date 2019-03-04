@@ -23,14 +23,7 @@ class AuthScreen extends Component {
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>AuthScreen</Text>
-        <Text>AuthScreen</Text>
-        <Text>AuthScreen</Text>
-        <Text>AuthScreen</Text>
-      </View>
-    );
+    return <View />;
   }
 }
 

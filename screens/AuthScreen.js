@@ -14,7 +14,7 @@ class AuthScreen extends Component {
 
   componentWillMount() {
     this.props.facebookLogin();
-    AsyncStorage.removeItem('fb_token');
+    // AsyncStorage.removeItem('fb_token');
   }
 
   render() {
@@ -29,7 +29,11 @@ class AuthScreen extends Component {
   }
 }
 
+const mapStateToProps = ({ auth }) => {
+  return { token: auth.token };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { facebookLogin }
 )(AuthScreen);

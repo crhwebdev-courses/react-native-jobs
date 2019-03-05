@@ -48,7 +48,8 @@ class MapScreen extends Component {
           <Button
             large
             title="Search this area"
-            backgroundColor="#009688"
+            buttonStyle={styles.buttonStyle}
+            titleStyle={styles.buttonTitleStyle}
             icon={{ name: 'search' }}
             onPress={this.onButtonPress}
           />
@@ -62,8 +63,14 @@ const styles = {
   buttonContainer: {
     position: 'absolute',
     bottom: 20,
-    left: 0,
-    right: 0
+    left: 10,
+    right: 10
+  },
+  buttonStyle: {
+    backgroundColor: '#009688'
+  },
+  buttonTitleStyle: {
+    fontSize: 20
   }
 };
 

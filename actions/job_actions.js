@@ -5,33 +5,53 @@ import qs from 'qs';
 import { FETCH_JOBS } from './types';
 
 //NOTE: using indeed no longer works; use github jobs instead
-const JOB_ROOT_URL = 'http://api.indeed.com/ads/apisearch?';
+const JOB_ROOT_URL = 'https://jobs.github.com/positions.json?';
 const JOB_QUERY_PARAMS = {
-  publisher: '4201738803816157',
-  format: 'json',
-  v: '2',
-  latlong: 1,
-  radius: 25,
-  q: 'javascript'
+  location: '',
+  search: 'javascript'
 };
 
 const buildJobsUrl = zip => {
-  const query = qs.stringify({ ...JOB_QUERY_PARAMS, l: zip });
+  const query = qs.stringify({ ...JOB_QUERY_PARAMS, location: zip });
   return `${JOB_ROOT_URL}${query}`;
 };
 
 export const fetchJobs = (region, callback) => async dispatch => {
-  // try {
-  //NOTE: use expo location api instead
-  let zip = await Location.reverseGeocodeAsync(region);
-  console.log(zip);
+  try {
+    /*output is an array with index 0 holding the location data
+    in format of { 
+        city: 'Santa Cruz',
+        country: 'United States',
+        isoCountryCode: 'US',
+        name: '598',
+        postalCode: '95065',
+        region: 'California',
+        street: 'Upper Park Road' 
+      }
+    */
+    let locations = await Location.reverseGeocodeAsync(region);
+    let zip = locations[0] && locations[0].postalCode;
 
-  //   const url = buildJobsUrl(zip);
+    /*
+    github jobs ajax request info:
+    base url: https://jobs.github.com/positions.json?
+    queries: 
+     search=javascript
+     lat=lat
+     long=long
+     location= city name, zip code
 
-  //   let { data } = await axios.get(url);
-  //   dispatch({ type: FETCH_JOBS, payload: data });
-  //   callback();
-  // } catch (error) {
-  //   console.log(error);
-  // }
+     example would be https://jobs.github.com/positions.json?location=95065&search=javascript
+
+  */
+
+    const url = buildJobsUrl(zip);
+
+    let { data } = await axios.get(url);
+    dispatch({ type: FETCH_JOBS, payload: data });
+    callback();
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
 };

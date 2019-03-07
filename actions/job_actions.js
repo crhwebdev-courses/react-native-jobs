@@ -1,5 +1,5 @@
 import axios from 'axios';
-import reverseGeocode from 'latlng-to-zip';
+import { Location } from 'expo';
 import qs from 'qs';
 
 import { FETCH_JOBS } from './types';
@@ -21,16 +21,17 @@ const buildJobsUrl = zip => {
 };
 
 export const fetchJobs = (region, callback) => async dispatch => {
-  try {
-    //NOTE: use expo location api instead
-    let zip = await reverseGeocode(region);
+  // try {
+  //NOTE: use expo location api instead
+  let zip = await Location.reverseGeocodeAsync(region);
+  console.log(zip);
 
-    const url = buildJobsUrl(zip);
+  //   const url = buildJobsUrl(zip);
 
-    let { data } = await axios.get(url);
-    dispatch({ type: FETCH_JOBS, payload: data });
-    callback();
-  } catch (error) {
-    console.log(error);
-  }
+  //   let { data } = await axios.get(url);
+  //   dispatch({ type: FETCH_JOBS, payload: data });
+  //   callback();
+  // } catch (error) {
+  //   console.log(error);
+  // }
 };

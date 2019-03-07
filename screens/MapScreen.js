@@ -1,18 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, ActivityIndicator } from 'react-native';
+import { View, Platform, ActivityIndicator } from 'react-native';
 import { Button } from 'react-native-elements';
-import { MapView } from 'expo';
+import { MapView, Location, Constants, Permissions } from 'expo';
 import { fetchJobs } from '../actions';
 
 class MapScreen extends Component {
   state = {
     mapLoaded: false,
+    errorMessage: '',
     region: {
       longitude: -122,
       latitude: 37,
       longitudeDelta: 0.04,
       latitudeDelta: 0.09
+    }
+  };
+
+  componentWillMount() {
+    if (Platform.OS === 'android' && !Constants.isDevice) {
+      this.setState({
+        errorMessage:
+          'Oops, this will not work on Sketch in an Android emulator. Try it on your device!'
+      });
+    } else {
+      this.getLocationAsync();
+    }
+  }
+
+  getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'Permission to access location was denied'
+      });
     }
   };
 

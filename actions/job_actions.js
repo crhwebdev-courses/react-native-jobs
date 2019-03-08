@@ -8,7 +8,8 @@ import { FETCH_JOBS } from './types';
 const JOB_ROOT_URL = 'https://jobs.github.com/positions.json?';
 const JOB_QUERY_PARAMS = {
   location: '',
-  search: 'javascript'
+  search: 'javascript',
+  markdown: true
 };
 
 const buildJobsUrl = zip => {

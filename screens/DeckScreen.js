@@ -1,17 +1,50 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
+import { MapView } from 'expo';
+import { Card, Button } from 'react-native-elements';
 import Swipe from '../components/Swipe';
 
 class DeckScreen extends Component {
+  renderCard(job) {
+    return (
+      <Card title={job.title}>
+        <View style={styles.detailWrapper}>
+          <Text>{job.company}</Text>
+        </View>
+        <View style={styles.detailWrapper}>
+          <Text>Created: {job.created_at}</Text>
+        </View>
+
+        <Text>{job.description.split('\r\n\r\n')[0]}</Text>
+      </Card>
+    );
+  }
+
+  renderNoMoreCards() {
+    return <Card title="No more jobs" />;
+  }
+
   render() {
     return (
       <View>
-        <Swipe data={this.props.jobs} />
+        <Swipe
+          data={this.props.jobs}
+          renderCard={this.renderCard}
+          renderNoMoreCards={this.renderNoMoreCards}
+        />
       </View>
     );
   }
 }
+
+const styles = {
+  detailWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 10
+  }
+};
 
 const mapStateToProps = ({ jobs }) => {
   return { jobs: jobs.results };

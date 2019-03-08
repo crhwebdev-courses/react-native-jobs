@@ -7,14 +7,20 @@ import Swipe from '../components/Swipe';
 
 class DeckScreen extends Component {
   renderCard(job) {
+    const getDateDifferenceInDays = (time1, time2) => {
+      dateDifference = Math.abs(time1 - time2);
+      return Math.ceil(dateDifference / (1000 * 3600 * 24));
+    };
+
     return (
       <Card title={job.title}>
         <View style={styles.detailWrapper}>
           <Text>{job.company}</Text>
+          <Text>
+            {getDateDifferenceInDays(Date.now(), new Date(job.created_at))} days
+          </Text>
         </View>
-        <View style={styles.detailWrapper}>
-          <Text>Created: {job.created_at}</Text>
-        </View>
+        <View style={styles.detailWrapper} />
 
         <Text>{job.description.split('\r\n\r\n')[0]}</Text>
       </Card>

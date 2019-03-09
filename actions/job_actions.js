@@ -49,7 +49,7 @@ export const fetchJobs = (region, callback) => async dispatch => {
 
     let { data } = await axios.get(url);
 
-    const dataWithRegion = data.map(job => ({ ...job, region }));
+    const dataWithRegion = data.map(job => ({ ...job, region: { ...region } }));
 
     dispatch({ type: FETCH_JOBS, payload: dataWithRegion });
     callback();

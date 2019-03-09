@@ -15,8 +15,8 @@ class DeckScreen extends Component {
     const initialRegion = {
       longitude: job.region ? job.region.longitude : 0,
       latitude: job.region ? job.region.latitude : 0,
-      latitudeDelta: 0.045,
-      longitudeDelta: 0.02
+      latitudeDelta: job.region ? job.region.latitudeDelta : 0.09,
+      longitudeDelta: job.region ? job.region.longitudeDelta : 0.04
     };
 
     return (

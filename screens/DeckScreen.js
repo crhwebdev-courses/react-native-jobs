@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text } from 'react-native';
-import { MapView } from 'expo';
+import { View, Text, Platform } from 'react-native';
+import { MapView, Location } from 'expo';
 import { Card, Button } from 'react-native-elements';
 import Swipe from '../components/Swipe';
 
@@ -12,8 +12,24 @@ class DeckScreen extends Component {
       return Math.ceil(dateDifference / (1000 * 3600 * 24));
     };
 
+    const initialRegion = {
+      longitude: -122,
+      latitude: 37,
+      latitudeDelta: 0.045,
+      longitudeDelta: 0.02
+    };
+
     return (
       <Card title={job.title}>
+        <View style={{ height: 300 }}>
+          <MapView
+            scrollEnabled={false}
+            style={{ flex: 1 }}
+            cacheEnabled={Platform.OS === 'android' ? true : false}
+            initialRegion={initialRegion}
+          />
+        </View>
+
         <View style={styles.detailWrapper}>
           <Text>{job.company}</Text>
           <Text>

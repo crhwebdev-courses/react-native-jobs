@@ -45,11 +45,13 @@ export const fetchJobs = (region, callback) => async dispatch => {
      example would be https://jobs.github.com/positions.json?location=95065&search=javascript
 
   */
-
     const url = buildJobsUrl(zip);
 
     let { data } = await axios.get(url);
-    dispatch({ type: FETCH_JOBS, payload: data });
+
+    const dataWithRegion = data.map(job => ({ ...job, region }));
+
+    dispatch({ type: FETCH_JOBS, payload: dataWithRegion });
     callback();
   } catch (error) {
     console.log(error);

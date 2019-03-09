@@ -13,8 +13,8 @@ class DeckScreen extends Component {
     };
 
     const initialRegion = {
-      longitude: -122,
-      latitude: 37,
+      longitude: job.region ? job.region.longitude : 0,
+      latitude: job.region ? job.region.latitude : 0,
       latitudeDelta: 0.045,
       longitudeDelta: 0.02
     };

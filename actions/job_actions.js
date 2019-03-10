@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Location } from 'expo';
 import qs from 'qs';
 
-import { FETCH_JOBS } from './types';
+import { FETCH_JOBS, LIKE_JOB } from './types';
 
 //NOTE: using indeed no longer works; use github jobs instead
 const JOB_ROOT_URL = 'https://jobs.github.com/positions.json?';
@@ -92,4 +92,11 @@ export const fetchJobs = (region, callback) => async dispatch => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const likeJob = job => {
+  return {
+    payload: job,
+    type: LIKE_JOB
+  };
 };

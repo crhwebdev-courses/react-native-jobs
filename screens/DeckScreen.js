@@ -4,6 +4,7 @@ import { View, Text, Platform } from 'react-native';
 import { MapView, Location } from 'expo';
 import { Card, Button } from 'react-native-elements';
 import Swipe from '../components/Swipe';
+import { likeJob } from '../actions';
 
 class DeckScreen extends Component {
   renderCard(job) {
@@ -54,6 +55,7 @@ class DeckScreen extends Component {
           data={this.props.jobs}
           renderCard={this.renderCard}
           renderNoMoreCards={this.renderNoMoreCards}
+          onSwipeRight={job => this.props.likeJob(job)}
           keyProp="id"
         />
       </View>
@@ -73,4 +75,7 @@ const mapStateToProps = ({ jobs }) => {
   return { jobs: jobs.results };
 };
 
-export default connect(mapStateToProps)(DeckScreen);
+export default connect(
+  mapStateToProps,
+  { likeJob }
+)(DeckScreen);

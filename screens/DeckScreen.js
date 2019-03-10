@@ -13,22 +13,22 @@ class DeckScreen extends Component {
       return Math.ceil(dateDifference / (1000 * 3600 * 24));
     };
 
-    const initialRegion = {
-      longitude: job.region ? job.region.longitude : 0,
-      latitude: job.region ? job.region.latitude : 0,
-      latitudeDelta: job.region ? job.region.latitudeDelta : 0.09,
-      longitudeDelta: job.region ? job.region.longitudeDelta : 0.04
-    };
+    // const initialRegion = {
+    //   longitude: job.region ? job.region.longitude : 0,
+    //   latitude: job.region ? job.region.latitude : 0,
+    //   latitudeDelta: job.region ? job.region.latitudeDelta : 0.09,
+    //   longitudeDelta: job.region ? job.region.longitudeDelta : 0.04
+    // };
 
     return (
       <Card title={job.title}>
         <View style={{ height: 300 }}>
-          <MapView
+          {/* <MapView
             scrollEnabled={false}
             style={{ flex: 1 }}
             cacheEnabled={false}
             initialRegion={initialRegion}
-          />
+          /> */}
         </View>
 
         <View style={styles.detailWrapper}>

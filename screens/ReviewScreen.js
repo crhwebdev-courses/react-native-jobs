@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 
@@ -37,4 +38,8 @@ class ReviewScreen extends Component {
   }
 }
 
-export default ReviewScreen;
+function mapStateToProps({ likedJobs }) {
+  return { likedJobs };
+}
+
+export default connect(mapStateToProps)(ReviewScreen);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, Text, ScrollView } from 'react-native';
+import { Button, Card } from 'react-native-elements';
 
 class ReviewScreen extends Component {
   /*
@@ -25,18 +25,49 @@ class ReviewScreen extends Component {
     };
   };
 
+  renderLikedJobs() {
+    const getDateDifferenceInDays = (time1, time2) => {
+      dateDifference = Math.abs(time1 - time2);
+      return Math.ceil(dateDifference / (1000 * 3600 * 24));
+    };
+
+    return this.props.likedJobs.map(job => {
+      return (
+        <Card key={job.id}>
+          <View style={{ height: 200 }}>
+            <View style={styles.detailWrapper}>
+              <Text style={styles.italics}>{job.company}</Text>
+              <Text style={styles.italics}>
+                {getDateDifferenceInDays(Date.now(), new Date(job.created_at))}{' '}
+                days ago
+              </Text>
+            </View>
+          </View>
+        </Card>
+      );
+    });
+  }
+
   render() {
     return (
       <View>
-        <Text>ReviewScreen</Text>
-        <Text>ReviewScreen</Text>
-        <Text>ReviewScreen</Text>
-        <Text>ReviewScreen</Text>
-        <Text>ReviewScreen</Text>
+        <ScrollView>{this.renderLikedJobs()}</ScrollView>
+        <Text>{this.props.likedJobs.length}</Text>
       </View>
     );
   }
 }
+
+const styles = {
+  detailWrapper: {
+    marginBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  italics: {
+    fontStyle: 'italic'
+  }
+};
 
 function mapStateToProps({ likedJobs }) {
   return { likedJobs };

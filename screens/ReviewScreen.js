@@ -32,20 +32,22 @@ class ReviewScreen extends Component {
     };
 
     return this.props.likedJobs.map(job => {
+      const { id, company, created_at, url } = job;
+
       return (
-        <Card key={job.id}>
+        <Card key={id}>
           <View style={{ height: 200 }}>
             <View style={styles.detailWrapper}>
-              <Text style={styles.italics}>{job.company}</Text>
+              <Text style={styles.italics}>{company}</Text>
               <Text style={styles.italics}>
-                {getDateDifferenceInDays(Date.now(), new Date(job.created_at))}{' '}
-                days ago
+                {getDateDifferenceInDays(Date.now(), new Date(created_at))} days
+                ago
               </Text>
             </View>
             <Button
               title="Apply Now!"
               buttonStyle={{ backgroundColor: '#03A9F4' }}
-              onPress={() => Linking.openURL(job.url)}
+              onPress={() => Linking.openURL(url)}
             />
           </View>
         </Card>

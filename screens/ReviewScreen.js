@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, ScrollView, Linking } from 'react-native';
 import { Button, Card } from 'react-native-elements';
+import { MapView } from 'expo';
 
 class ReviewScreen extends Component {
   /*
@@ -32,11 +33,24 @@ class ReviewScreen extends Component {
     };
 
     return this.props.likedJobs.map(job => {
-      const { id, company, created_at, url } = job;
+      const { id, company, created_at, url, region } = job;
+
+      const initialRegion = {
+        longitude: region ? region.longitude : 0,
+        latitude: region ? region.latitude : 0,
+        latitudeDelta: region ? region.latitudeDelta : 0.09,
+        longitudeDelta: region ? region.longitudeDelta : 0.04
+      };
 
       return (
         <Card key={id}>
           <View style={{ height: 200 }}>
+            <MapView
+              style={{ flex: 1 }}
+              cacheEnabled={false}
+              scrollEnabled={false}
+              initialRegion={initialRegion}
+            />
             <View style={styles.detailWrapper}>
               <Text style={styles.italics}>{company}</Text>
               <Text style={styles.italics}>

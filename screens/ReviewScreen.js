@@ -33,7 +33,7 @@ class ReviewScreen extends Component {
     };
 
     return this.props.likedJobs.map(job => {
-      const { id, company, created_at, url, region } = job;
+      const { id, company, created_at, url, region, title } = job;
 
       const initialRegion = {
         longitude: region ? region.longitude : 0,
@@ -43,7 +43,7 @@ class ReviewScreen extends Component {
       };
 
       return (
-        <Card key={id}>
+        <Card title={title} key={id}>
           <View style={{ height: 200 }}>
             <MapView
               style={{ flex: 1 }}

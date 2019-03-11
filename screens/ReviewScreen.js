@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Linking } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 
 class ReviewScreen extends Component {
@@ -42,6 +42,11 @@ class ReviewScreen extends Component {
                 days ago
               </Text>
             </View>
+            <Button
+              title="Apply Now!"
+              buttonStyle={{ backgroundColor: '#03A9F4' }}
+              onPress={() => Linking.openURL(job.url)}
+            />
           </View>
         </Card>
       );

@@ -1,8 +1,11 @@
+import React from 'react';
 import {
   createBottomTabNavigator,
   createStackNavigator,
   createAppContainer
 } from 'react-navigation';
+
+import { Icon } from 'react-native-elements';
 
 import WelecomScreen from './screens/WelecomeScreen';
 import AuthScreen from './screens/AuthScreen';
@@ -23,6 +26,13 @@ const MainFlowNavigator = createBottomTabNavigator({
   deck: DeckScreen,
   review: ReviewFlowNavigator
 });
+
+ReviewFlowNavigator.navigationOptions = {
+  tabBarLabel: 'Review',
+  tabBarIcon: ({ tintColor }) => {
+    return <Icon name="favorite" size={30} color={tintColor} />;
+  }
+};
 
 //Top level Tab navigation which contains initial secreens (Welcome and Auth)
 // and main flow

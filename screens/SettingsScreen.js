@@ -9,7 +9,10 @@ class SettingsScreen extends Component {
     return (
       <View>
         <Button
-          title="Clear Jobs"
+          title="Clear Liked Jobs"
+          large
+          icon={{ name: 'delete-forever' }}
+          buttonStyle={{ backgroundColor: '#F44336' }}
           onPress={() => this.props.clearLikedJobs()}
         />
       </View>

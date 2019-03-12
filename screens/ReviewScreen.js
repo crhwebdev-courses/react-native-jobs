@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, ScrollView, Linking } from 'react-native';
-import { Button, Card } from 'react-native-elements';
+import { Button, Card, Icon } from 'react-native-elements';
 import { MapView } from 'expo';
 
 class ReviewScreen extends Component {
@@ -22,7 +22,10 @@ class ReviewScreen extends Component {
           type="clear"
           onPress={() => navigation.navigate('settings')}
         />
-      )
+      ),
+      tabBarIcon: ({ tintColor }) => {
+        return <Icon name="favorite" size={30} color={tintColor} />;
+      }
     };
   };
 

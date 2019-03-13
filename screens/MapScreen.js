@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Platform, ActivityIndicator } from 'react-native';
+import { View, Text, Platform, ActivityIndicator } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { MapView, Location, Constants, Permissions } from 'expo';
 import { fetchJobs } from '../actions';
 
 class MapScreen extends Component {
   static navigationOptions = {
-    title: 'Map',
+    tabBarLabel: ({ tintColor }) => (
+      <Text style={{ fontSize: 14, textAlign: 'center', color: tintColor }}>
+        Map
+      </Text>
+    ),
+    size: 20,
     tabBarIcon: ({ tintColor }) => {
       return <Icon name="my-location" size={30} color={tintColor} />;
     }

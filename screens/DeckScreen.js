@@ -8,7 +8,11 @@ import { likeJob } from '../actions';
 
 class DeckScreen extends Component {
   static navigationOptions = {
-    title: 'Jobs',
+    tabBarLabel: ({ tintColor }) => (
+      <Text style={{ fontSize: 14, textAlign: 'center', color: tintColor }}>
+        Jobs
+      </Text>
+    ),
     tabBarIcon: ({ tintColor }) => {
       return <Icon name="description" size={30} color={tintColor} />;
     }

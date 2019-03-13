@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from 'react-native';
 import {
   createBottomTabNavigator,
   createStackNavigator,
@@ -20,19 +21,23 @@ const ReviewFlowNavigator = createStackNavigator({
   settings: SettingsScreen
 });
 
+ReviewFlowNavigator.navigationOptions = {
+  tabBarLabel: ({ tintColor }) => (
+    <Text style={{ fontSize: 14, textAlign: 'center', color: tintColor }}>
+      Review
+    </Text>
+  ),
+  tabBarIcon: ({ tintColor }) => {
+    return <Icon name="favorite" size={30} color={tintColor} />;
+  }
+};
+
 //Tab navigation for main app flow
 const MainFlowNavigator = createBottomTabNavigator({
   map: MapScreen,
   deck: DeckScreen,
   review: ReviewFlowNavigator
 });
-
-ReviewFlowNavigator.navigationOptions = {
-  tabBarLabel: 'Review',
-  tabBarIcon: ({ tintColor }) => {
-    return <Icon name="favorite" size={30} color={tintColor} />;
-  }
-};
 
 //Top level Tab navigation which contains initial secreens (Welcome and Auth)
 // and main flow
